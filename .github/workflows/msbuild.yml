@@ -46,4 +46,4 @@ jobs:
     - uses: actions/upload-artifact@master
       with:
         name: "Mouse Debouncer" 
-        path: MOUSED~1\bin\*
+        path: MOUSED~1\x64\Release\*
