@@ -14,6 +14,8 @@
 #include <Strsafe.h>
 #include "optparse.h"
 #include "resource.h"
+#include <winuser.h>
+#include <VersionHelpers.h>
 
 #if defined (DEBUG) | defined (_DEBUG)
 #define DEBUG_PRINTF(fmt, ...) \
@@ -80,8 +82,11 @@ static uint64_t counts_per_second;
 static bool use_qpc;
 static bool has_icon_been_shown = false;
 
+
 int CALLBACK wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ PWSTR lpCmdLine, _In_ int nCmdShow)
 {
+	// Set DPI aware to system aware.
+	if (IsWindowsVistaOrGreater()){SetProcessDPIAware();}
 	// Limit the application to one instance.
 	const HANDLE mutex = CreateMutex(NULL, TRUE, L"{05B95384-625D-491A-A326-94758957C021}");
 	if (!mutex)
