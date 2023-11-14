@@ -51,7 +51,7 @@ jobs:
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: |
        cmd /c md Artifacts
-       cmd /c copy /y x86\Release\MOUSED~1.exe Artifacts\MouseDebouncer32.exe
+       cmd /c copy /y Release\MOUSED~1.exe     Artifacts\MouseDebouncer32.exe
        cmd /c copy /y x64\Release\MOUSED~1.exe Artifacts\MouseDebouncer64.exe
 
     - uses: actions/upload-artifact@master
