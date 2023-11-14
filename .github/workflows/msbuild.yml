@@ -41,9 +41,20 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+      run: |
+       msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=Win32 ${{env.SOLUTION_FILE_PATH}}
+       msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x64   ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Copy and rename
+      working-directory: ${{env.SOLUTION_FILE_PATH}}
+      # Add additional options to the MSBuild command line here (like platform or verbosity level).
+      # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
+      run: |
+       cmd /c md Artifacts
+       cmd /c copy /y Win32\Release\MOUSED~1.exe Artifacts\MouseDebouncer32.exe
+       cmd /c copy /y x64\Release\MOUSED~1.exe   Artifacts\MouseDebouncer64.exe
 
     - uses: actions/upload-artifact@master
       with:
         name: "Mouse Debouncer" 
-        path: MOUSED~1\x64\Release\*
+        path: MOUSED~1\Artifacts\*
