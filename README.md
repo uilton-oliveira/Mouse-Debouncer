@@ -31,3 +31,4 @@ A small performant Windows "tray application" which suppresses false double clic
 \* *If no button is specified, the left button will be automatically set.*
 
 Credits to **[skeeto](https://github.com/skeeto)** for **[Optparse](https://github.com/skeeto/Optparse)**!
+ 
